@@ -18,7 +18,7 @@ else:
 
 
 print("moving directories")
-for folder_name in ['stats', 'summaries', 'data']:
+for folder_name in ["stats", "summaries", "data"]:
     src_folder = os.path.join(os.path.join(TMP_DIR, "jad-ai-main"), folder_name)
     dest_folder = os.path.join(HTML_DIR, folder_name)
     shutil.move(src_folder, dest_folder)
