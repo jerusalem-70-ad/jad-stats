@@ -31,16 +31,13 @@ for x in bible_refs:
     if book not in bibl_refs_data:
         bibl_refs_data[book] = []
     bibl_refs_data[book].append(x)
-print(bibl_refs_data)
 
 drilldown_data = []
 for key, value in bibl_refs_data.items():
     item = {}
     item["name"] = key
     item["id"] = key
-    for x in value:
-        item["data"] = []
-        item["data"].append([x[0], x[1]])
+    item["data"] = value
     drilldown_data.append(item)
 
 series = [
@@ -51,15 +48,16 @@ series = [
     }
 ]
 
-drilldown = {
-    "breadcrumbs": {"position": {"align": "right"}},
-    "series": drilldown_data
-}
+drilldown = {"breadcrumbs": {"position": {"align": "right"}}, "series": drilldown_data}
 
-with open(os.path.join(HIGHCHARTS_DATA, "bibl-books-series.json"), "w", encoding="utf-8") as f:
+with open(
+    os.path.join(HIGHCHARTS_DATA, "bibl-books-series.json"), "w", encoding="utf-8"
+) as f:
     json.dump(series, f, ensure_ascii=False)
 
-with open(os.path.join(HIGHCHARTS_DATA, "bibl-books-drilldown.json"), "w", encoding="utf-8") as f:
+with open(
+    os.path.join(HIGHCHARTS_DATA, "bibl-books-drilldown.json"), "w", encoding="utf-8"
+) as f:
     json.dump(drilldown, f, ensure_ascii=False)
 
 print("Done")

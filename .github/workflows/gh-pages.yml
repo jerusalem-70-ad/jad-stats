@@ -36,15 +36,12 @@ jobs:
           cache: 'pip'
       - run: pip install -r requirements.txt
       - name: Build the Website
-        run: |
-          python scripts/fetch_data.py
-          python scripts/build_static.py
+        run: ./build.sh 
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: './html'
       - name: Deploy to GitHub Pages
         id: deployment

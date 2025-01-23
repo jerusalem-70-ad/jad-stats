@@ -1,20 +1,23 @@
 async function loadChartData() {
   try {
-    const drilldownResponse = await fetch('hc-data/bibl-books-drilldown.json');
+    const drilldownResponse = await fetch("hc-data/bibl-books-drilldown.json");
     const drilldownData = await drilldownResponse.json();
 
-    const seriesResponse = await fetch('hc-data/bibl-books-series.json');
+    const seriesResponse = await fetch("hc-data/bibl-books-series.json");
     const seriesData = await seriesResponse.json();
 
-    Highcharts.chart("container", {
+    Highcharts.chart("hc-vis", {
       chart: {
         type: "column",
+        zooming: {
+          type: "x",
+        },
       },
       title: {
         text: "",
       },
       subtitle: {
-        text: 'Click the columns to view verses.',
+        text: "Click the columns to view verses.",
       },
       accessibility: {
         announceNewData: {
@@ -33,11 +36,11 @@ async function loadChartData() {
         enabled: true,
       },
       series: seriesData,
-      drilldown: drilldownData
+      drilldown: drilldownData,
     });
   } catch (error) {
-    console.error('Error loading chart data:', error);
+    console.error("Error loading chart data:", error);
   }
 }
 
-document.addEventListener('DOMContentLoaded', loadChartData);
+document.addEventListener("DOMContentLoaded", loadChartData);
